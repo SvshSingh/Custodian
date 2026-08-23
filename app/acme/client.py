@@ -33,7 +33,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 
 from app.acme.jws import b64url, key_authorization, sign_jws
 
-log = logging.getLogger("certward.acme")
+log = logging.getLogger("custodian.acme")
 
 JOSE_CONTENT_TYPE = "application/jose+json"
 

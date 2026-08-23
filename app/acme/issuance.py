@@ -31,7 +31,7 @@ from app.acme.client import AcmeClient, AcmeError, Http01Challenge
 from app.acme.csr import build_csr, csr_der, generate_domain_key, save_certificate, save_private_key
 from app.acme.jws import generate_account_key, load_account_key, save_account_key
 
-log = logging.getLogger("certward.issuance")
+log = logging.getLogger("custodian.issuance")
 
 
 @dataclass

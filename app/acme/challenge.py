@@ -30,7 +30,7 @@ import logging
 from pathlib import Path
 from typing import Protocol
 
-log = logging.getLogger("certward.challenge")
+log = logging.getLogger("custodian.challenge")
 
 WELL_KNOWN = ".well-known/acme-challenge"
 

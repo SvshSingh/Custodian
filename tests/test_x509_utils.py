@@ -21,7 +21,7 @@ def test_reads_identity_and_validity(certificate_pem):
 
     assert facts.common_name == "api.example.com"
     assert facts.sans == ["api.example.com", "www.example.com"]
-    assert facts.issuer_organization == "Certward Test"
+    assert facts.issuer_organization == "Custodian Test"
     assert facts.key_type == "RSA"
     assert facts.key_bits == 2048
     assert facts.is_self_signed is True

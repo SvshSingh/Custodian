@@ -1,4 +1,4 @@
-# certward plus Pebble, Let's Encrypt's test ACME server.
+# Custodian plus Pebble, Let's Encrypt's test ACME server.
 #
 # Pebble issues certificates from a throwaway root, enforces no rate limits,
 # and can be told to approve challenges without making real HTTP requests --
@@ -31,7 +31,7 @@ services:
     # sufficient here because nothing talks to Pebble until someone calls
     # /certificates/renew, long after both containers have settled.
 
-  certward:
+  custodian:
     build: .
     ports:
       - "8000:8000"
@@ -42,13 +42,13 @@ services:
       # honour this against Let's Encrypt.
       ACME_INSECURE: "true"
       ACME_CONTACT_EMAIL: ops@test.local
-      DATABASE_URL: sqlite+aiosqlite:////app/data/certward.db
+      DATABASE_URL: sqlite+aiosqlite:////app/data/custodian.db
       LLM_DISABLED: "true"
     volumes:
       # Named volume so issued keys and certificates survive a rebuild.
-      - certward-data:/app/data
+      - custodian-data:/app/data
     depends_on:
       - pebble
 
 volumes:
-  certward-data:
+  custodian-data:

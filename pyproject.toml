@@ -1,5 +1,5 @@
 [project]
-name = "certward"
+name = "custodian"
 version = "0.1.0"
 description = "TLS certificate discovery, risk assessment and ACME renewal."
 readme = "README.md"

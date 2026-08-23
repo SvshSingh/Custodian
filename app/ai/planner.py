@@ -48,7 +48,7 @@ from typing import Any
 from app.ai.guard import sanitize, sanitize_many, wrap_untrusted
 from app.config import Settings
 
-log = logging.getLogger("certward.planner")
+log = logging.getLogger("custodian.planner")
 
 SEVERITY_RANK = {"expired": 0, "critical": 1, "warning": 2, "watch": 3, "ok": 4}
 

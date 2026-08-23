@@ -33,10 +33,10 @@ class Settings(BaseSettings):
         env_file=".env", env_file_encoding="utf-8", extra="ignore"
     )
 
-    app_name: str = "certward"
+    app_name: str = "custodian"
     debug: bool = False
 
-    database_url: str = "sqlite+aiosqlite:///./certward.db"
+    database_url: str = "sqlite+aiosqlite:///./custodian.db"
 
     # -- ACME --------------------------------------------------------------
     ca_provider: str = "pebble"

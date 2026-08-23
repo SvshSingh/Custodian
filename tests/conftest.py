@@ -54,7 +54,7 @@ def make_certificate(
     name = x509.Name(
         [
             x509.NameAttribute(NameOID.COMMON_NAME, common_name),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Certward Test"),
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Custodian Test"),
         ]
     )
     now = datetime.now(UTC)

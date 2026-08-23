@@ -1,5 +1,5 @@
 """
-certward -- TLS certificate lifecycle service.
+Custodian -- TLS certificate lifecycle service.
 
 Discovers certificates by probing live hosts, keeps an inventory, assesses
 expiry and hygiene risk, and renews via ACME.
@@ -25,7 +25,7 @@ logging.basicConfig(
     format="%(asctime)s %(levelname)-8s %(name)s: %(message)s",
 )
 
-log = logging.getLogger("certward")
+log = logging.getLogger("custodian")
 
 
 @asynccontextmanager
@@ -39,7 +39,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     settings = get_settings()
     await init_models()
 
-    log.info("certward ready | CA: %s", settings.directory_url)
+    log.info("custodian ready | CA: %s", settings.directory_url)
     if settings.llm_disabled:
         log.info("LLM disabled; renewal planning is rule-based")
     else:
@@ -51,11 +51,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
     yield
 
-    log.info("certward shutting down")
+    log.info("custodian shutting down")
 
 
 app = FastAPI(
-    title="certward",
+    title="Custodian",
     version="0.1.0",
     summary="TLS certificate discovery, risk assessment and ACME renewal.",
     description=__doc__,

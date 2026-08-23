@@ -18,10 +18,10 @@ RUN pip install --no-cache-dir .
 
 # Run as a non-root user. This service writes private keys; if it is ever
 # compromised, the blast radius should not include the whole container.
-RUN useradd --create-home --uid 1000 certward \
+RUN useradd --create-home --uid 1000 custodian \
     && mkdir -p /app/data \
-    && chown -R certward:certward /app
-USER certward
+    && chown -R custodian:custodian /app
+USER custodian
 
 EXPOSE 8000
 

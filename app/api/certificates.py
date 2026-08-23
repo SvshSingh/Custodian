@@ -161,7 +161,7 @@ async def renew_certificate(
     Returns 200 with `succeeded: false` on a CA rejection rather than a 5xx.
     The request was handled correctly; the CA declined, and the error type and
     detail in the body are what the caller needs to act on. A 500 here would
-    imply certward malfunctioned, which is a different and misleading thing
+    imply custodian malfunctioned, which is a different and misleading thing
     to page someone about.
 
     This runs the issuance inline, which can take tens of seconds. A

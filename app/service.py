@@ -24,7 +24,7 @@ from app.core.risk import assess
 from app.core.x509_utils import CertificateFacts, describe_bytes
 from app.models import Certificate, RenewalAttempt
 
-log = logging.getLogger("certward.service")
+log = logging.getLogger("custodian.service")
 
 DEFAULT_PORT = 443
 

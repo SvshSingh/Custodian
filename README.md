@@ -43,7 +43,7 @@ than an honest absence.
   certificate renewed. Not consulted.
 - **Account key rollover**, and revocation signed with the certificate's own
   key rather than the account key.
-- **Deployment.** certward issues a certificate to disk. Getting it onto a
+- **Deployment.** Custodian issues a certificate to disk. Getting it onto a
   load balancer and reloading without dropping connections is the other half
   of a real CLM system, and is not here.
 - **Authentication.** There is none. This is a single-user local service;
@@ -56,8 +56,8 @@ than an honest absence.
 Requires Python 3.11+. On Windows, use `py -3` in place of `python`.
 
 ```bash
-git clone <your-fork-url> certward
-cd certward
+git clone <your-fork-url> custodian
+cd custodian
 
 python -m venv .venv
 # Windows:      .venv\Scripts\activate
@@ -96,7 +96,7 @@ Needs Docker (Docker Desktop on Windows).
 docker compose up
 ```
 
-That starts **Pebble**, Let's Encrypt's official test CA, alongside certward.
+That starts **Pebble**, Let's Encrypt's official test CA, alongside Custodian.
 Pebble issues from a throwaway root, has no rate limits, and is configured
 here with `PEBBLE_VA_ALWAYS_VALID=1` so challenges are approved without a
 real HTTP fetch — meaning the full protocol runs with no public domain and
@@ -108,7 +108,7 @@ curl -X POST localhost:8000/certificates/renew \
   -d '{"domains":["api.test.local"]}'
 ```
 
-The issued certificate lands in the `certward-data` volume and appears in the
+The issued certificate lands in the `custodian-data` volume and appears in the
 inventory.
 
 **Do not point this at Let's Encrypt production while learning.** Their rate
