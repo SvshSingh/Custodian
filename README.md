@@ -1,4 +1,4 @@
-# certward
+# Custodian
 
 A TLS certificate lifecycle service. It discovers certificates by probing
 live hosts, keeps an inventory, scores them for expiry and hygiene risk, and
