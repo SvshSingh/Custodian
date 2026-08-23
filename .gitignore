@@ -1,0 +1,24 @@
+# Secrets and issued material. Nothing under data/ belongs in git --
+# account.key is your identity to the CA and privkey.pem files are the
+# private keys your servers terminate TLS with.
+.env
+data/
+*.key
+*.pem
+!tests/**/*.pem
+
+*.db
+*.db-journal
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+.idea/
+.vscode/
+.DS_Store

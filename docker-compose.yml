@@ -1,0 +1,54 @@
+# certward plus Pebble, Let's Encrypt's test ACME server.
+#
+# Pebble issues certificates from a throwaway root, enforces no rate limits,
+# and can be told to approve challenges without making real HTTP requests --
+# so a full issuance runs locally with no public domain and nothing bound to
+# port 80.
+#
+#   docker compose up
+#   curl -X POST localhost:8000/certificates/renew \
+#        -H 'content-type: application/json' \
+#        -d '{"domains":["api.test.local"]}'
+
+services:
+  pebble:
+    image: ghcr.io/letsencrypt/pebble:latest
+    command: -config /test/config/pebble-config.json -strict
+    ports:
+      - "14000:14000"   # ACME directory -> https://pebble:14000/dir
+      - "15000:15000"   # management API
+    environment:
+      # Skip the artificial delay Pebble adds between validation attempts.
+      PEBBLE_VA_NOSLEEP: "1"
+      # Approve HTTP-01 challenges without actually fetching the token. This
+      # is what removes the need for a public domain -- the protocol still
+      # runs end to end, only the network fetch is short-circuited.
+      PEBBLE_VA_ALWAYS_VALID: "1"
+    # No healthcheck: the Pebble image is distroless, so there is no shell and
+    # no wget to run one with -- any `test` command fails with "executable file
+    # not found" and the container is marked unhealthy forever even though the
+    # server is up. Ordering is handled by a plain depends_on below, which is
+    # sufficient here because nothing talks to Pebble until someone calls
+    # /certificates/renew, long after both containers have settled.
+
+  certward:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      ACME_DIRECTORY_URL: https://pebble:14000/dir
+      # Pebble's API is served under its own untrusted test root, so
+      # verification has to be off to talk to it. app/config.py refuses to
+      # honour this against Let's Encrypt.
+      ACME_INSECURE: "true"
+      ACME_CONTACT_EMAIL: ops@test.local
+      DATABASE_URL: sqlite+aiosqlite:////app/data/certward.db
+      LLM_DISABLED: "true"
+    volumes:
+      # Named volume so issued keys and certificates survive a rebuild.
+      - certward-data:/app/data
+    depends_on:
+      - pebble
+
+volumes:
+  certward-data:

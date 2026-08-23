@@ -1,0 +1,26 @@
+# Keep the build context small and free of secrets. Without this the whole
+# virtualenv and the local SQLite database are uploaded to the daemon on
+# every build, and data/ holds account and private keys.
+.venv/
+venv/
+data/
+.env
+
+*.db
+*.db-journal
+*.key
+*.pem
+
+.git/
+.gitignore
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+tests/
+.idea/
+.vscode/
+.DS_Store
