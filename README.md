@@ -7,12 +7,6 @@ renews them over ACME.
 Built as a learning project to understand certificate lifecycle management,
 RFC 8555 and PKI from the protocol up rather than through a wrapper library.
 
-> **How this was built.** I wrote this over three days, pair-programming with
-> Claude. The design decisions, the scope calls, and the debugging are mine;
-> the typing was shared. I mention it because it is true and because I would
-> rather say so than have someone wonder. Every design note in the source is
-> there because I wanted to be able to defend the choice.
-
 ---
 
 ## What is actually implemented
